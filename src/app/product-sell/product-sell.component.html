@@ -1,8 +1,8 @@
 <a routerLink="/"> back </a>
 
 <h2 align="center">
-    Product Transection
-  </h2>
+  Product Transection
+</h2>
 
 <!-- start testing -->
 
@@ -14,10 +14,10 @@
         <label for="country">Product</label>
       </div>
       <div class="col-25">
-        
-        <select id="name" name="name" [(ngModel)]="productName" >
-            <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
-          </select>
+
+        <select id="name" name="name" [(ngModel)]="productName">
+          <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
+        </select>
       </div>
     </div>
 
@@ -28,8 +28,9 @@
         <label for="fname">Quantity</label>
       </div>
       <div class="col-25">
-       
-        <input type="number" [value]="quantityProduct" name="quantityProduct" id="quantityProduct" placeholder="quantity" ngModel>
+
+        <input type="number" [value]="quantityProduct" name="quantityProduct" id="quantityProduct" placeholder="quantity"
+          ngModel>
       </div>
     </div>
 
@@ -39,16 +40,97 @@
         <label for="lname">Price</label>
       </div>
       <div class="col-25">
-          <input type="number" [value]="priceProduct" name="priceProduct" id="priceProduct" placeholder="price" ngModel>
+        <input type="number" [value]="priceProduct" name="priceProduct" id="priceProduct" placeholder="price" ngModel>
       </div>
     </div>
 
 
-    <div class="row">
+    <div class="row" class="col-sm-10">
       <input type="submit" value="Add Product">
     </div>
   </form>
+
+
+
+
 </div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="container">
+
+        <form id="formProductSell" name="formProductSell" #productData="ngForm" (ngSubmit)="sellProducts( productData.value)">
+          <div class="row" style="padding-left: 15px;">
+            <div class="col-25">
+              <label for="country">Product</label>
+            </div>
+            <div class="col-25">
+
+              <select id="name" name="name" [(ngModel)]="productName">
+                <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="padding-left: 15px;">
+            <div class="col-25">
+              <label for="fname">Quantity</label>
+            </div>
+            <div class="col-25">
+
+              <input type="number" [value]="quantityProduct" name="quantityProduct" id="quantityProduct" placeholder="quantity"
+                ngModel>
+            </div>
+          </div>
+
+
+          <div class="row" style="padding-left: 15px;">
+            <div class="col-25">
+              <label for="lname">Price</label>
+            </div>
+            <div class="col-25">
+              <input type="number" [value]="priceProduct" name="priceProduct" id="priceProduct" placeholder="price"
+                ngModel>
+            </div>
+          </div>
+
+
+          <div class="row" class="col-sm-10">
+            <input type="submit" value="Add Product">
+          </div>
+        </form>
+
+
+
+
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="container_table">
+        <h2><strong>Present Product Status</strong></h2>
+
+          <table align="center">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            
+            <tr *ngFor="let product of productsAllForSell">
+              <td>{{product.id}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.Quantity}}</td>
+              
+            </tr>
+          </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <br>
 <br>
 
@@ -108,7 +190,7 @@
       <td align="center">{{singleProduct.Price}}</td>
       <td align="center">{{singleProduct.totalPrice}}</td>
 
-      <td (click)="deleteProduct(product.id)"><a>DELETE</a></td>
+      <td (click)="deleteProduct(singleProduct.id)"><a>DELETE</a></td>
 
     </tr>
 
@@ -116,10 +198,10 @@
       <td style="border: 1px solid white;"></td>
       <td style="border: 1px solid white;"></td>
       <td style="border: 1px solid black;" class="no-line text-center"><strong>Total Amount</strong></td>
-      <td class="no-line text-right" >{{totalAmount}}</td>
+      <td class="no-line text-right">{{totalAmount}}</td>
     </tr>
     <tr>
-    <button type="button" align="right" (click)="finishSell(9999)">Submit</button>
+      <button type="button" align="right" (click)="finishSell(9999)">Submit</button>
 
   </table>
 

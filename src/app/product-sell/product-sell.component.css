@@ -29,12 +29,12 @@
     background-color: #45a049;
   }
   
-  .container {
+  /* .container {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 
-  }
+  } */
   
   .col-25 {
     float: left;
@@ -53,6 +53,35 @@
     content: "";
     display: table;
     clear: both;
+    
+  }
+
+  .container {
+    border-radius: 5px;
+    padding: 25px;
+    width: 750px;
+    background-color: #f2f2f2;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .container_table {
+    border-radius: 5px;
+    padding: 20px;
+    width: 550px;
+    background-color: #f2f2f2;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .container-fluid {
+    border-radius: 5px;
+    padding-left: 15px;
+   
+    
   }
   
   

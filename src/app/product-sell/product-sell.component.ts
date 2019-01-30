@@ -29,11 +29,13 @@ export class ProductSellComponent implements OnInit {
   errorToChoseProduct: string = "Product already choosen"
   isAdded: boolean = false;
   products = [];
+  productsAllForSell=[];
   productSellObj = [];
   updateObj = [];
   totalAmount = 0;
   errorMessage = false;
   i: any = 0;
+  index:any;
 
 
 
@@ -53,25 +55,26 @@ export class ProductSellComponent implements OnInit {
       this.amount = newProduct.priceProduct * newProduct.quantityProduct;
 
       this.totalAmount = this.totalAmount + this.amount;
-      this.productSellObj.push({ name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, totalPrice: this.amount });
+      this.index = this.products.findIndex(presentProduct => presentProduct.name === newProduct.name);
+
+      this.productSellObj.push({ id:this.products[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, totalPrice: this.amount });
       
 
       //new code
 
-      const index = this.products.findIndex(presentProduct => presentProduct.name === newProduct.name);
-      this.products.splice(index, 1);
+      this.index = this.products.findIndex(presentProduct => presentProduct.name === newProduct.name);
+      this.products.splice(this.index, 1);
+      // this.productsAllForSell = res.json();
+      debugger
+      this.productsAllForSell[this.index].Quantity=this.productsAllForSell[this.index].Quantity - newProduct.quantityProduct;
 
       this.priceProduct = '';
       this.quantityProduct = '';
       this.nameProduct = null;
-      // this.productData.reset({
-      //   priceProduct:0,
-      //   quantityProduct:0
-
-      // });
+      
      
 
-      debugger
+      
 
       //end new code
 
@@ -116,9 +119,19 @@ export class ProductSellComponent implements OnInit {
   }
 
   deleteProduct(id) {
+    debugger
 
-    const index = this.productSellObj.findIndex(product => product.id === id);
-    this.productSellObj.splice(index, 1);
+    const indexForDelete = this.productSellObj.findIndex(product => product.id === id);
+
+    const delProInfo = this.productsAllForSell.filter(sellPro => sellPro.id == id); 
+    this.totalAmount = this.totalAmount - (this.productSellObj[indexForDelete].Quantity * this.productSellObj[indexForDelete].Price);
+    this.productSellObj.splice(indexForDelete, 1);
+    
+
+    
+    // this.singleProduct.totalPrice=null;
+    debugger
+    
 
 
   }
@@ -153,6 +166,7 @@ export class ProductSellComponent implements OnInit {
 
     this.priceProduct = null;
     this.quantityProduct = null;
+    this.getAllProducts();
 
 
   }
@@ -192,6 +206,7 @@ export class ProductSellComponent implements OnInit {
     this.http.get("http://localhost:3000/products").subscribe(
       (res: Response) => {
         this.products = res.json();
+        this.productsAllForSell = res.json();
 
 
       }
