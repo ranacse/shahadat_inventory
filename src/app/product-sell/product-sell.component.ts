@@ -122,14 +122,18 @@ export class ProductSellComponent implements OnInit {
     debugger
 
     const indexForDelete = this.productSellObj.findIndex(product => product.id === id);
-
-    const delProInfo = this.productsAllForSell.filter(sellPro => sellPro.id == id); 
+    var tempoProduct= this.productSellObj[indexForDelete];
     this.totalAmount = this.totalAmount - (this.productSellObj[indexForDelete].Quantity * this.productSellObj[indexForDelete].Price);
     this.productSellObj.splice(indexForDelete, 1);
+
+    //this.productsAllForSell.splice(2, 0, indexForDelete);
+    var length=this.products.length;
+    this.products.splice(length, 0, tempoProduct);
     
 
+
     
-    // this.singleProduct.totalPrice=null;
+
     debugger
     
 
