@@ -1,4 +1,4 @@
-<a routerLink="/"> back </a>
+<a routerLink="/"> Front Page </a>
 
 <h2 align="center">
   Product Transection
@@ -6,7 +6,7 @@
 
 <!-- start testing -->
 
-<div class="container">
+<!-- <div class="container">
 
   <form id="formProductSell" name="formProductSell" #productData="ngForm" (ngSubmit)="sellProducts( productData.value)">
     <div class="row">
@@ -53,7 +53,7 @@
 
 
 
-</div>
+</div> -->
 
 <br>
 <br>
@@ -102,6 +102,10 @@
           <div class="row" class="col-sm-10">
             <input type="submit" value="Add Product">
           </div>
+          <popup>Change quantity. Quantity is more than in store</popup>
+          <!-- <popup  (confirmClick)="YourConfirmEvent()" >
+              Add your own html elements here
+          </popup> -->
         </form>
 
 

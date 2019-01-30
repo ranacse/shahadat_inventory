@@ -29,25 +29,28 @@ export class ProductSellComponent implements OnInit {
   errorToChoseProduct: string = "Product already choosen"
   isAdded: boolean = false;
   products = [];
-  productsAllForSell=[];
+  productsAllForSell = [];
   productSellObj = [];
   updateObj = [];
   totalAmount = 0;
   errorMessage = false;
   i: any = 0;
-  index:any;
+  index: any;
 
 
 
   sellProducts = function (newProduct) {
-    
+    debugger
     let selectedProduct = this.products.filter(x => x.name == newProduct.name);
     if (newProduct.quantityProduct > selectedProduct[0].Quantity) {
       this.popup.options = {
         color: "red",
-        header: "Quantity Problem"
+        header: "Quantity Problem",
+        showButtons: true,
+        confirmBtnContent: "OK", // The text on your confirm button
+        cancleBtnContent: "Cancel"
       }
-      this.popup.show();
+      this.popup.show(this.popup.options);
 
     }
     else {
@@ -57,8 +60,8 @@ export class ProductSellComponent implements OnInit {
       this.totalAmount = this.totalAmount + this.amount;
       this.index = this.products.findIndex(presentProduct => presentProduct.name === newProduct.name);
 
-      this.productSellObj.push({ id:this.products[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, totalPrice: this.amount });
-      
+      this.productSellObj.push({ id: this.products[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, totalPrice: this.amount });
+
 
       //new code
 
@@ -66,15 +69,15 @@ export class ProductSellComponent implements OnInit {
       this.products.splice(this.index, 1);
       // this.productsAllForSell = res.json();
       debugger
-      this.productsAllForSell[this.index].Quantity=this.productsAllForSell[this.index].Quantity - newProduct.quantityProduct;
+      this.productsAllForSell[this.index].Quantity = this.productsAllForSell[this.index].Quantity - newProduct.quantityProduct;
 
       this.priceProduct = '';
       this.quantityProduct = '';
       this.nameProduct = null;
-      
-     
 
-      
+
+
+
 
       //end new code
 
@@ -118,25 +121,21 @@ export class ProductSellComponent implements OnInit {
 
   }
 
+  YourConfirmEvent(){
+    debugger
+    alert('You cliked confirm');
+  }
+
   deleteProduct(id) {
     debugger
 
     const indexForDelete = this.productSellObj.findIndex(product => product.id === id);
-    var tempoProduct= this.productSellObj[indexForDelete];
+    var tempoProduct = this.productSellObj[indexForDelete];
     this.totalAmount = this.totalAmount - (this.productSellObj[indexForDelete].Quantity * this.productSellObj[indexForDelete].Price);
     this.productSellObj.splice(indexForDelete, 1);
 
-    //this.productsAllForSell.splice(2, 0, indexForDelete);
-    var length=this.products.length;
+    var length = this.products.length;
     this.products.splice(length, 0, tempoProduct);
-    
-
-
-    
-
-    debugger
-    
-
 
   }
 
