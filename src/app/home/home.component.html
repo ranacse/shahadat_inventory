@@ -1,0 +1,60 @@
+<!-- <a routerLink = '/product'> + Add Product</a>
+<br>
+<a routerLink = '/sellProducts'> + Product Sell</a> -->
+<div class="sidenav">
+
+  <a></a>
+  <a></a>
+  <a></a>
+  <a></a>
+
+  <a [routerLink]="['/product']" style="font-size: 15px;" class="w3-bar-item w3-button"> Add Product</a>
+  <a [routerLink]="['/sellProducts']" style="font-size: 15px;" class="w3-bar-item w3-button"> Product Sell</a>
+  <a [routerLink]="['/updateQuntity']" style="font-size: 15px;" class="w3-bar-item w3-button"> Update Quantity</a>
+</div>
+<div class="navbar">
+  <p align="center"> </p>
+  <p align="center"> </p>
+</div>
+
+
+
+<div>
+
+  <<table align="center">
+    Products
+    </table>
+    <th></th>
+
+    <table align="center">
+      <th>ID</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th></th>
+      <th></th>
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.Quantity}}</td>
+        <td (click)="deleteProduct(product.id)"><a>DELETE</a></td>
+        <td [routerLink]="['/updateProduct', product.id]"><a>UPDATE</a></td>
+      </tr>
+    </table>
+
+    <!-- <div class="contailer">
+      <div class="col-sm-4"></div>
+      <button type="button" mdbBtn color="primary" mdbWavesEffect align="center" (click)="updateProductQuantity()">Finish</button>
+    </div>
+    <div class="contailer">
+      <div class="col-sm-4"></div>
+      <button type="button" mdbBtn color="primary" mdbWavesEffect align="center" (click)="updateProductQuantity()">Finish</button>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="quantity">Qquantity</label>
+          <input type="number" class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity">
+        </div>
+      </div>
+      
+    </div> -->
+</div>

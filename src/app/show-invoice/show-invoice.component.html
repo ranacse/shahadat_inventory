@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>A simple, clean, and responsive HTML invoice template</title>
+
+    <style>
+
+    </style>
+</head>
+
+
+
+<body>
+    
+
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0" style="border: 1px solid white; ">
+            <tr class="top" style="border: 1px solid white;">
+                <td colspan="5" style="border: 1px solid white;">
+                    <table style="border: 1px solid white;">
+                        <tr style="border: 1px solid white;">
+                            <td class="title" style="border: 1px solid white;">
+
+                                <img src="assets/images/logo3.png" style="width:100%; max-width:300px;">
+                            </td>
+                            <!-- <td  class="title" style="border: 1px solid white;"></td> -->
+
+                            <td style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: px;">
+                                Invoice #: {{invoiceNumbber }}<br>
+                                Created:
+                                {{todayDate | date:'MM/dd/yyyy'}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr style="border: 1px solid white;" class="information">
+                <td colspan="5" style="border: 1px solid white;">
+                    <table style="border: 1px solid white;">
+                        <tr>
+                            <td style="border: 1px solid white; font-size: 15px;">
+                                AL BARAKA ELECTRONICS.<br>
+                                HOLY MAKKAH utaybiyyah al Andalus<br>
+                                Mob: 0542048086 - 0534697283
+                            </td>
+
+                            <td style="border: 1px solid white; font-size: 15px;">
+                                Acme Corp.<br>
+                                John Doe<br>
+                                john@example.com
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr style="border: 1px solid white; background: #eee;
+            border-bottom: 1px solid #ddd;" align="center"
+                bgcolor="#FF0000">
+                <td style="border: 1px solid white;">
+                    S No.
+                </td>
+                <td style="border: 1px solid white;">
+                    Item
+                </td>
+                <td style="text-align:center; border: 1px solid white;">
+                    Quantity
+                </td>
+
+                <td style="border: 1px solid white;">
+                    Price
+                </td>
+                <td style="border: 1px solid white;">
+                    Amount
+                </td>
+            </tr>
+
+            <!-- <tr class="item"> -->
+
+            <tr align="center" *ngFor="let product of currentProducts">
+
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.serialNo}}</td>
+
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.ProductName}}</td>
+                <td style="border: 1px solid white; text-align:center; border-bottom: 1px solid currentColor;font-size: 15px;">{{product.Quantity}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.Price}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.TotalAmount}}</td>
+
+
+            </tr>
+
+            <tr class="total">
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;" align="right"></td>
+
+                <td style="border: 1px solid white;;" align="center">
+
+                </td>
+            </tr>
+
+            <tr class="total">
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="font-size: 15px; border: 1px solid white;" align="right">Total Amount =</td>
+
+                <td style="border: 1px solid;border: 2px solid;border-radius: 8px;" align="center">
+                    {{fullAmount}}
+                </td>
+            </tr>
+
+            <tr class="total">
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="font-size: 15px;border: 1px solid white;" align="right">VAT =</td>
+
+                <td style="font-size: 15px;border: 1px solid ;" align="center">
+
+                </td>
+            </tr>
+            <tr class="total">
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="border: 1px solid white;"></td>
+                <td style="font-size: 15px;border: 1px solid white;" align="right">Net Amount =</td>
+
+                <td style="border: 1px solid; border: 2px solid;border-radius: 8px;" align="center">
+
+                </td>
+            </tr>
+
+
+
+
+
+        </table>
+    </div>
+
+    <!-- <div id="content"></div> -->
+    <button (click)="downloadPDF()">Create PDF</button>
+    <!-- <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="pdfToHTML()">Create PDF</button> -->
+
+
+
+
+    <!-- </div> -->
+</body>
+
+</html>

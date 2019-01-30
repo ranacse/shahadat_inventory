@@ -1,0 +1,134 @@
+<a routerLink="/"> back </a>
+
+<h2 align="center">
+    Product Transection
+  </h2>
+
+<!-- start testing -->
+
+<div class="container">
+
+  <form id="formProductSell" name="formProductSell" #productData="ngForm" (ngSubmit)="sellProducts( productData.value)">
+    <div class="row">
+      <div class="col-25">
+        <label for="country">Product</label>
+      </div>
+      <div class="col-25">
+        
+        <select id="name" name="name" [(ngModel)]="productName" >
+            <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
+          </select>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Quantity</label>
+      </div>
+      <div class="col-25">
+       
+        <input type="number" [value]="quantityProduct" name="quantityProduct" id="quantityProduct" placeholder="quantity" ngModel>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Price</label>
+      </div>
+      <div class="col-25">
+          <input type="number" [value]="priceProduct" name="priceProduct" id="priceProduct" placeholder="price" ngModel>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <input type="submit" value="Add Product">
+    </div>
+  </form>
+</div>
+<br>
+<br>
+
+<!-- emd testig -->
+
+
+<!-- <table align="center"> -->
+<!-- <form id="formProductSell" name="formProductSell" #productData="ngForm" (ngSubmit)="sellProducts(productData.value)">
+
+  <div class="form-group" class="col-sm-3">
+    <label for="department">
+      Name :
+
+    </label>
+    <select id="name" name="name" [(ngModel)]="name" class="form-control">
+      <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
+    </select>
+
+
+    <label>Price: </label><input type="number" [value]="priceProduct" name="price" id="price" placeholder="price"
+      ngModel><br>
+    <label align="left">Quantity: </label><input type="number" [value]="quantityProduct" name="quantityProduct" id="quantity"
+      placeholder="quantity" ngModel><br>
+    <input type="submit" value="Sell Products">
+  </div>
+  <popup>Change quantity. Quantity is more than in store</popup>
+
+</form> -->
+
+
+<div class="container">
+
+
+
+</div>
+<h1 *ngIf="errorMessage" class="alert alert-danger">
+  <strong>Danger!</strong> {{errorToChoseProduct}}
+</h1>
+
+
+
+<h1 align="center">
+  Its Invoice From Shahadat
+</h1>
+<div class="container">
+  <table align="center">
+
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Amount</th>
+
+    <tr *ngFor="let singleProduct of productSellObj">
+
+      <td align="center">{{singleProduct.name}}</td>
+      <td align="center">{{singleProduct.Quantity}}</td>
+      <td align="center">{{singleProduct.Price}}</td>
+      <td align="center">{{singleProduct.totalPrice}}</td>
+
+      <td (click)="deleteProduct(product.id)"><a>DELETE</a></td>
+
+    </tr>
+
+    <tr align="right">
+      <td style="border: 1px solid white;"></td>
+      <td style="border: 1px solid white;"></td>
+      <td style="border: 1px solid black;" class="no-line text-center"><strong>Total Amount</strong></td>
+      <td class="no-line text-right" >{{totalAmount}}</td>
+    </tr>
+    <tr>
+    <button type="button" align="right" (click)="finishSell(9999)">Submit</button>
+
+  </table>
+
+</div>
+
+<br>
+<h3 *ngIf="isAdded">{{confirmationString}}</h3>
+
+<div *ngIf="isAdded">
+  <a routerLink="/invoice"> Show invoice </a>
+
+</div>
