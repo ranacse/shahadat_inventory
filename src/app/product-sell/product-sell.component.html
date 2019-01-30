@@ -4,56 +4,6 @@
   Product Transection
 </h2>
 
-<!-- start testing -->
-
-<!-- <div class="container">
-
-  <form id="formProductSell" name="formProductSell" #productData="ngForm" (ngSubmit)="sellProducts( productData.value)">
-    <div class="row">
-      <div class="col-25">
-        <label for="country">Product</label>
-      </div>
-      <div class="col-25">
-
-        <select id="name" name="name" [(ngModel)]="productName">
-          <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
-        </select>
-      </div>
-    </div>
-
-
-
-    <div class="row">
-      <div class="col-25">
-        <label for="fname">Quantity</label>
-      </div>
-      <div class="col-25">
-
-        <input type="number" [value]="quantityProduct" name="quantityProduct" id="quantityProduct" placeholder="quantity"
-          ngModel>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Price</label>
-      </div>
-      <div class="col-25">
-        <input type="number" [value]="priceProduct" name="priceProduct" id="priceProduct" placeholder="price" ngModel>
-      </div>
-    </div>
-
-
-    <div class="row" class="col-sm-10">
-      <input type="submit" value="Add Product">
-    </div>
-  </form>
-
-
-
-
-</div> -->
 
 <br>
 <br>
@@ -201,7 +151,7 @@
     <tr align="right">
       <td style="border: 1px solid white;"></td>
       <td style="border: 1px solid white;"></td>
-      <td style="border: 1px solid black;" class="no-line text-center"><strong>Total Amount</strong></td>
+      <td style="border: 1px solid black;" class="no-line text-center"><strong>Total </strong></td>
       <td class="no-line text-right">{{totalAmount}}</td>
     </tr>
     <tr>
@@ -212,9 +162,9 @@
 </div>
 
 <br>
-<h3 *ngIf="isAdded">{{confirmationString}}</h3>
+<!-- <h3 *ngIf="isAdded">{{confirmationString}}</h3> -->
 
-<div *ngIf="isAdded">
+<div *ngIf="isAdded" align="center">
   <a routerLink="/invoice"> Show invoice </a>
 
 </div>

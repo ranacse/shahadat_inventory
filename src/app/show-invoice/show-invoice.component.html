@@ -13,9 +13,9 @@
 
 
 <body>
-    
 
-    <div class="invoice-box">
+
+    <div class="invoice-box" id="obrz">
         <table cellpadding="0" cellspacing="0" style="border: 1px solid white; ">
             <tr class="top" style="border: 1px solid white;">
                 <td colspan="5" style="border: 1px solid white;">
@@ -25,7 +25,7 @@
 
                                 <img src="assets/images/logo3.png" style="width:100%; max-width:300px;">
                             </td>
-                            <!-- <td  class="title" style="border: 1px solid white;"></td> -->
+                          
 
                             <td style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: px;">
                                 Invoice #: {{invoiceNumbber }}<br>
@@ -79,7 +79,7 @@
                 </td>
             </tr>
 
-            <!-- <tr class="item"> -->
+           
 
             <tr align="center" *ngFor="let product of currentProducts">
 
@@ -144,13 +144,43 @@
     </div>
 
     <!-- <div id="content"></div> -->
-    <button (click)="downloadPDF()">Create PDF</button>
+    <button (click)="downloadPdf()">Create PDF</button>
     <!-- <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="pdfToHTML()">Create PDF</button> -->
-
-
-
-
     <!-- </div> -->
+    <!-- <div >
+        <br><br>
+        <p class="float-right font-weight-bold">Образац ЗПО</p>
+        <br>
+        <p class="float-left font-weight-bold">Подаци о обвезнику:</p>
+
+        <br>
+
+        <div class="row" style="width:100%">
+            <div class="col-md-2">
+                <p>Порески обвезник:</p>
+            </div>
+            <div class="col-md-10"><input value="{{userModel.imeIprezime}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
+                    style="border-bottom: 1px solid black"></div>
+            <div class="col-md-2">
+                <p>ПИБ:</p>
+            </div>
+            <div class="col-md-10"><input value="{{userModel.PIB}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
+                    style="border-bottom: 1px solid black"></div>
+            <div class="col-md-2">
+                <p>Адреса:</p>
+            </div>
+            <div class="col-md-10"><input value="{{userModel.ulica + ' ' + userModel.broj + ' ' + userModel.grad}}"
+                    type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
+                    style="border-bottom: 1px solid black"></div>
+            <div class="col-md-2">
+                <p>Општина:</p>
+            </div>
+            <div class="col-md-10"><input value="{{userModel.opstina}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
+                    style="border-bottom: 1px solid black"></div>
+        </div>
+        <br>
+        <button (click)="downloadPdf()">Download PDF</button>
+    </div> -->
 </body>
 
 </html>

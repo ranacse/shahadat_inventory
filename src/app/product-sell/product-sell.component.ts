@@ -170,8 +170,6 @@ export class ProductSellComponent implements OnInit {
     this.priceProduct = null;
     this.quantityProduct = null;
     this.getAllProducts();
-
-
   }
 
   finalProducts(item) {
@@ -197,8 +195,6 @@ export class ProductSellComponent implements OnInit {
     debugger
 
     return this.http.put(url, body, { headers: headerOptions }).map(res => res.json());
-
-
 
   }
 

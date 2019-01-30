@@ -37,32 +37,29 @@ export class ShowInvoiceComponent implements OnInit {
 
   constructor(private http: Http) { }
 
-  public downloadPDF() {
+  downloadPdf() {
     debugger
+    var date = new Date();
+    var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
     let doc = new jsPDF();
+    var pdfName = "Invoice_".concat(this.invoiceNumbber.toString()).concat("_Date_").concat(FromDate).concat(".pdf") ;
 
-    let specialElementHandlers = {
-      '#editor': function (element, renderer) {
-        return true;
-      }
-    };
-
-    let content = this.content.nativeElement;
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      'width': 190,
-      'elementHandlers': specialElementHandlers
+    doc.addHTML(document.getElementById("obrz"), function () {
+      doc.save(pdfName);
     });
-
-    doc.save('shahadat_print.pdf');
-
   }
 
 
   user: any;
 
   ngOnInit() {
+    debugger
+    this.myDate = new Date();
+    this.todayDate = new Date(Date.parse(Date()));
 
-    //console.log(this.asd.products[0]);
+    var date = new Date();
+    var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 
     this.http.get("http://localhost:3000/sellProducts").subscribe(
       (res: Response) => {
