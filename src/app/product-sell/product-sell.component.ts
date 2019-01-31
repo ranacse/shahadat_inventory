@@ -36,6 +36,8 @@ export class ProductSellComponent implements OnInit {
   errorMessage = false;
   i: any = 0;
   index: any;
+  finalProduct:any={};
+  
 
 
 
@@ -74,57 +76,14 @@ export class ProductSellComponent implements OnInit {
       this.priceProduct = '';
       this.quantityProduct = '';
       this.nameProduct = null;
+      this.finalProduct={};
 
-
-
-
-
-      //end new code
-
-      // this.per = this.productSellObj.filter(x => x.name == product.name);
-
-      // if (this.productSellObj.length == 0) {  //if before no more added
-
-      //   this.amount = product.price * product.quantityProduct;
-
-      //   this.totalAmount = this.totalAmount + this.amount;
-      //   this.productSellObj.push({ name: product.name, Price: product.price, Quantity: product.quantityProduct, totalPrice: this.amount });
-      //   this.priceProduct = null;
-      //   this.quantityProduct = null;
-      //   this.nameProduct = null;
-      // }
-      // else {  // if more product added before
-
-      //   if (this.per.length == 0) {  //if same product not added before
-      //     this.amount = product.price * product.quantityProduct;
-
-      //     this.totalAmount = this.totalAmount + this.amount;
-      //     this.productSellObj.push({ name: product.name, Price: product.price, Quantity: product.quantityProduct, totalPrice: this.amount });
-      //     this.priceProduct = null;
-      //     this.quantityProduct = null;
-      //     this.nameProduct = null;
-      //     product.name=null;
-      //   }
-      //   else {
-      //     // this.popup.options={  //add same product
-      //     //   color:"red"
-      //     // }
-      //     // this.popup.show();
-      //     this.errorMessage= true;
-
-      //   }
-
-
-      // }
     }   //end of first else
 
 
   }
 
-  YourConfirmEvent(){
-    debugger
-    alert('You cliked confirm');
-  }
+  
 
   deleteProduct(id) {
     debugger
@@ -149,11 +108,14 @@ export class ProductSellComponent implements OnInit {
 
       if (res.status == 200) {
 
+        //insert each product one by one
+
         this.productSellObj.forEach(item => {
           var currentProductQuantity = item.Quantity;
           this.http.post("http://localhost:3000/sellProducts/", item).subscribe((res: Response) => {
 
             if (res.status == 200) {
+              debugger
               console.log("step :  ........start post function  .........");
               this.finalProducts(item);
 
@@ -162,6 +124,8 @@ export class ProductSellComponent implements OnInit {
           })
 
         });
+        this.productSellObj=null;
+        this.totalAmount=null;
 
       }
 
@@ -169,6 +133,7 @@ export class ProductSellComponent implements OnInit {
 
     this.priceProduct = null;
     this.quantityProduct = null;
+   
     this.getAllProducts();
   }
 

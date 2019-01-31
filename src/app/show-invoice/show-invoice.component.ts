@@ -25,7 +25,7 @@ export class ShowInvoiceComponent implements OnInit {
   productForSell = [];
   currentProducts = [];
   exist = false;
-  invoiceNumbber = 0;
+  invoiceNumber = 0;
   productObj: object = {};
   private headers = new Headers({ 'Content-Type': 'application/json' });
   data: object = {};
@@ -43,7 +43,7 @@ export class ShowInvoiceComponent implements OnInit {
     var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 
     let doc = new jsPDF();
-    var pdfName = "Invoice_".concat(this.invoiceNumbber.toString()).concat("_Date_").concat(FromDate).concat(".pdf") ;
+    var pdfName = "Invoice_".concat(this.invoiceNumber.toString()).concat("_Date_").concat(FromDate).concat(".pdf") ;
 
     doc.addHTML(document.getElementById("obrz"), function () {
       doc.save(pdfName);
@@ -72,7 +72,7 @@ export class ShowInvoiceComponent implements OnInit {
           this.currentProducts[i].serialNo = serialNo;
           serialNo++;
 
-          this.invoiceNumbber = this.currentProducts[i].id + 1000;
+          this.invoiceNumber = this.currentProducts[i].id + 1000;
         }
 
         debugger
