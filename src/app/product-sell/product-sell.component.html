@@ -20,8 +20,8 @@
             </div>
             <div class="col-25" >
 
-              <select id="name" class="form-control" name="name" [(ngModel)]="finalProduct.name" >
-                <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
+              <select id="name" class="form-control" name="name" style="font-size: 8px;" [(ngModel)]="finalProduct.name" >
+                <option *ngFor="let product of products" value="{{product.name}}" style="font-size: 10px;"><strong>{{product.name}}</strong></option>
               </select>
             </div>
           </div>
@@ -76,7 +76,7 @@
           <th>Name</th>
           <th>Quantity</th>
 
-          <tr *ngFor="let product of productsAllForSell" style="font-size: 5px;">
+          <tr *ngFor="let product of productsAllForSell" >
             <td style="font-size: 15px;">{{product.id}}</td>
             <td style="font-size: 15px;">{{product.name}}</td>
             <td style="font-size: 15px;">{{product.Quantity}}</td>
