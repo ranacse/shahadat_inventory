@@ -1,20 +1,45 @@
+<div class="sidenav">
+
+  <a></a>
+  <a></a>
+  <a></a>
+  <a></a>
+
+  <a [routerLink]="['/product']" style="font-size: 15px;" class="w3-bar-item w3-button"> Add Product</a>
+  <a [routerLink]="['/sellProducts']" style="font-size: 15px;" class="w3-bar-item w3-button"> Product Sell</a>
+  <a [routerLink]="['/updateQuntity']" style="font-size: 15px;" class="w3-bar-item w3-button"> Update Quantity</a>
+</div>
+<div class="navbar">
+  <p align="center"> </p>
+  <p align="center"> </p>
+</div>
+
 <div class="container">
-  <h2>Inline form</h2>
-  <p>Make the viewport larger than 768px wide to see that all of the form elements are inline, left aligned, and the labels are alongside.</p>
-  <form class="form-inline" action="/action_page.php">
+  <h2></h2>
+  <p></p>
+  <form class="form-inline" >
     <div class="form-group">
       <label for="email">Product:</label>
-      <select id="name" name="name" [(ngModel)]="name" class="form-control">
+      <select id="name" name="name" [(ngModel)]="updateProduct.name" class="form-control">
         <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="pwd">Quantiy:</label>
-      <input type="number"  [(ngModel)]="quantity" class="form-control" id="pwd" placeholder="Enter New Quantiy" name="pwd">
+      <label for="pwd">Add Quantiy:</label>
+      <input type="number"  [(ngModel)]="updateProduct.quantity" class="form-control" id="pwd" placeholder="Enter New Quantiy" name="pwd">
     </div>
    
     
   </form>
   <!-- <button type="submit" class="btn btn-default" >Submit</button>-->
-  <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="updateQuantity(name,quantity)">Finish</button> 
+  <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="updateQuantity(updateProduct)">Finish</button> 
 </div>
+
+<div *ngIf="asd" align="center">
+  <h1>Sucessfully updated</h1>
+
+</div>
+<!-- <popup  (confirmClick)="YourConfirmEvent()" >
+ Your Product Updated Successfully
+</popup> -->
+<!-- <popup>Change quantity. Quantity is more than in store</popup> -->

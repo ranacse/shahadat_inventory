@@ -31,13 +31,14 @@
       <th>Name</th>
       <th>Quantity</th>
       <th></th>
-      <th></th>
+      
       <tr *ngFor="let product of products">
         <td>{{product.id}}</td>
         <td>{{product.name}}</td>
         <td>{{product.Quantity}}</td>
-        <td (click)="deleteProduct(product.id)"><a>DELETE</a></td>
-        <td [routerLink]="['/updateProduct', product.id]"><a>UPDATE</a></td>
+        <!-- <td (click)="deleteProduct(product.id)"><a>DELETE</a></td> -->
+        <td><button type="submit" align="right" class="btn btn-default" (click)="deleteProduct(product.id)">DELETE</button></td> 
+        <!-- <td [routerLink]="['/updateProduct', product.id]"><a>UPDATE</a></td> -->
       </tr>
     </table>
 

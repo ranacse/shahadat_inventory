@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import 'rxjs/add/operator/map';
+import { Popup } from 'ng2-opd-popup';
 
 @Component({
   selector: 'app-update-product-quantity',
@@ -16,11 +17,13 @@ import 'rxjs/add/operator/map';
 })
 export class UpdateProductQuantityComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: Http) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: Http, private popup: Popup) { }
+
 
   products=[];
   updatedItem=[];
   productObj:object = {};
+  asd:boolean=false;
   //id:number;
   updateProduct={};
   updatedQuantity:number;
@@ -38,38 +41,15 @@ export class UpdateProductQuantityComponent implements OnInit {
 
   }
 
-  // updateQuantity(name, quantity){
-    
-  //   let updateProduct =  this.products.filter(x => x.name == name)[0];
-
-  //   let newQuantity=updateProduct.Quantity - quantity;
-    
-  //   this.updatedItem.push({ name: name, Quantity: newQuantity });
-  //   const url = `${"http://localhost:3000/updateQuntity"}`;
-  //   var body = JSON.stringify(this.updatedItem);
-
-  //   var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-  //   var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
-
-  //   let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-  //   let options = new RequestOptions({ headers: cpHeaders });
-
-  //   debugger
-
-  //   return this.http.put(url, body, { headers: headerOptions }).map(res => res.json());
-      
-
-   
-  // }
-
-  updateQuantity(name, quantity) {
+ 
+  updateQuantity(updateProductQuan) {
     
 debugger
-    this.updateProduct = this.products.filter(x => x.name == name);
-    this.updatedQuantity=this.updateProduct[0].Quantity + quantity;
+    this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
+    this.updatedQuantity=this.updateProduct[0].Quantity + updateProductQuan.quantity;
     this.productObj = {
       'id': this.updateProduct[0].id,
-      "name": name,
+      "name": updateProductQuan.name,
       "Quantity": this.updatedQuantity
     };
     
@@ -77,8 +57,17 @@ debugger
     this.http.put(url, JSON.stringify(this.productObj), {headers: this.headers})
       .toPromise()
       .then(() => {
+        this.asd=true;
         this.router.navigate(['/']);
-      })
+        // this.router.navigate(['/']);
+      });
+      this.asd=true;
+      this.updateProduct={};
+      // this.popup.show(this.popup.options);
+  }
+
+  YourConfirmEvent(){
+    this.router.navigate(['/']);
   }
 
   ngOnInit() {

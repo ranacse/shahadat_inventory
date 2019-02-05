@@ -1,18 +1,65 @@
-<a routerLink = "/"> < back </a>
+<div class="sidenav">
 
-<h2>
-  Add New Product
-</h2>
+  <a></a>
+  <a></a>
+  <a></a>
+  <a></a>
 
-<form id = "formNewProduct" name = "formNewProduct" #productData = "ngForm" (ngSubmit) = "addNewProduct(productData.value)">
-  <label>Name: </label><input type = "text" [value]="productName" name="productName" id="name" placeholder="name" ngModel><br>
-  <label>Quantity: </label><input type = "number" [value]="productQuantity" name="quantity" id="quantity" placeholder="Quantity" ngModel><br>
-  <input type="submit" value = "Add Product">
-</form>
+  <a [routerLink]="['/product']" style="font-size: 15px;" class="w3-bar-item w3-button"> Add Product</a>
+  <a [routerLink]="['/sellProducts']" style="font-size: 15px;" class="w3-bar-item w3-button"> Product Sell</a>
+  <a [routerLink]="['/updateQuntity']" style="font-size: 15px;" class="w3-bar-item w3-button"> Update Quantity</a>
+</div>
+<div class="navbar">
+  <p align="center"> </p>
+  <p align="center"> </p>
+</div>
+
+
+
 
 <br>
-<h3 *ngIf = "isAdded" >{{confirmationString}}</h3>
+
 
 
 <!-- <h3 *ngIf = "!isAdded" >{{failConfirmationString}}</h3> -->
+<div class="row">
+  <div class="col-sm-8">
+    <div class="container">
 
+      <form class="form-horizontal">
+        <div class="row" style="padding-left: 15px;">
+          <div class="col-25">
+            <label class="control-label col-sm-2" for="position">Product </label>
+          </div>
+          <div class="col-25">
+            <input type="text" class="form-control" name="name" id="name" [(ngModel)]="finalProduct.name"
+              placeholder="Name">
+          </div>
+        </div>
+
+        <div class="row" style="padding-left: 15px;">
+          <div class="col-25">
+            <label for="fname">Quantity</label>
+          </div>
+          <div class="col-25">
+
+            <input type="number" class="form-control" name="quantityProduct" id="quantityProduct" [(ngModel)]="finalProduct.quantityProduct"
+              placeholder="quantity">
+          </div>
+        </div>
+
+
+        
+        <div class="form-group" class="row">
+          <div class=" col-sm-10">
+            <button type="submit" class="btn btn-default" (click)="addNewProduct(finalProduct)">Add Product</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  
+</div>
+
+<div class="col-sm-8" style="padding-left: 75px;"><h3 style="padding-left: 125px;" >{{confirmationString}}</h3></div>

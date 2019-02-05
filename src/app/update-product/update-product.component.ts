@@ -31,7 +31,7 @@ export class UpdateProductComponent implements OnInit {
     this.http.put(url, JSON.stringify(this.productObj), {headers: this.headers})
       .toPromise()
       .then(() => {
-        this.router.navigate(['/']);
+        //this.router.navigate(['/']);
       })
   }
 

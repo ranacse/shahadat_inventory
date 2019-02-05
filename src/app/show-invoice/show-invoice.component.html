@@ -14,7 +14,10 @@
 
 <body>
 
-
+    
+        <!-- <app-product-sell ></app-product-sell> -->
+        <!-- <app-product-sell [message12]="message12"></app-product-sell> -->
+        
     <div class="invoice-box" id="obrz">
         <table cellpadding="0" cellspacing="0" style="border: 1px solid white; ">
             <tr class="top" style="border: 1px solid white;">
@@ -28,7 +31,7 @@
                           
 
                             <td style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: px;">
-                                Invoice #: {{invoiceNumbber }}<br>
+                                Invoice #: {{lastProductInvoice }}<br>
                                 Created:
                                 {{todayDate | date:'MM/dd/yyyy'}}
                             </td>
@@ -81,14 +84,14 @@
 
            
 
-            <tr align="center" *ngFor="let product of currentProducts">
+            <tr align="center" *ngFor="let product of sellProducts">
 
-                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.serialNo}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.sellId}}</td>
 
-                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.ProductName}}</td>
-                <td style="border: 1px solid white; text-align:center; border-bottom: 1px solid currentColor;font-size: 15px;">{{product.Quantity}}</td>
-                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.Price}}</td>
-                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.TotalAmount}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.productName}}</td>
+                <td style="border: 1px solid white; text-align:center; border-bottom: 1px solid currentColor;font-size: 15px;">{{product.quantity}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.price}}</td>
+                <td style="border: 1px solid white; font-size: 15px;border-bottom: 1px solid currentColor;">{{product.TotalSellAmount}}</td>
 
 
             </tr>
@@ -111,7 +114,7 @@
                 <td style="font-size: 15px; border: 1px solid white;" align="right">Total Amount =</td>
 
                 <td style="border: 1px solid;border: 2px solid;border-radius: 8px;" align="center">
-                    {{fullAmount}}
+                    {{totalAmount}}
                 </td>
             </tr>
 
@@ -145,6 +148,9 @@
 
     <!-- <div id="content"></div> -->
     <button (click)="downloadPdf()">Create PDF</button>
+
+     <!-- <app-product-sell (messageEvent)="receiveMessage($event)"></app-product-sell> -->
+     <!-- Message: {{message123}} -->
     <!-- <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="pdfToHTML()">Create PDF</button> -->
     <!-- </div> -->
     <!-- <div >

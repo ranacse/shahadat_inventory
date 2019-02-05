@@ -13,14 +13,15 @@ export class ProductComponent implements OnInit {
   failConfirmationString:string = "Failed to add Product";
   isAdded: boolean = false;
   productObj:object = {};
+  finalProduct:object={};
   // productName:any;
   // productQuantity:any;
 
   addNewProduct = function(product) {
     
     this.productObj = {
-      "name": product.productName,
-      "Quantity": product.quantity
+      "name": product.name,
+      "Quantity": product.quantityProduct
     }
     debugger
     this.http.post("http://localhost:3000/products/", this.productObj).subscribe((res:Response) => {
