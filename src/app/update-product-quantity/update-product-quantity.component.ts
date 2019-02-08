@@ -9,8 +9,6 @@ import 'rxjs/add/operator/toPromise';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import 'rxjs/add/operator/map';
 import { Popup } from 'ng2-opd-popup';
-import { ToasterService } from '../toaster-service.service';
-import {MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-product-quantity',
@@ -19,7 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 })
 export class UpdateProductQuantityComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: Http, private popup: Popup,private toasterService: ToasterService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: Http, private popup: Popup) { }
 
 
   products=[];
@@ -63,9 +61,8 @@ debugger
         this.router.navigate(['/']);
         // this.router.navigate(['/']);
       });
-     // this.asd=true;
+      this.asd=true;
       this.updateProduct={};
-      this.success();
       // this.popup.show(this.popup.options);
   }
 
@@ -73,14 +70,10 @@ debugger
     this.router.navigate(['/']);
   }
 
-  success() {
-
-    this.toasterService.Success("Updated Successfully","Update Product");
-
-  }
-
   ngOnInit() {
-
+    // this.route.params.subscribe(params => {
+    //   this.id = +params['id'];
+    // });
     this.getAllProducts();
   }
 
