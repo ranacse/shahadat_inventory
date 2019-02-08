@@ -11,6 +11,7 @@ import { ProductComponent } from './product/product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ProductSellComponent } from './product-sell/product-sell.component';
 import { ShowInvoiceComponent } from './show-invoice/show-invoice.component';
+import{ToasterService} from './toaster-service.service';
 import { UpdateProductQuantityComponent } from './update-product-quantity/update-product-quantity.component';
 
 @NgModule({
@@ -38,7 +39,7 @@ import { UpdateProductQuantityComponent } from './update-product-quantity/update
     ]),
     PopupModule.forRoot(),
   ],
-  providers: [],
+  providers: [ToasterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

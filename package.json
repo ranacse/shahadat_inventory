@@ -17,6 +17,7 @@
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
+    "@angular/material": "^7.3.1",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
@@ -28,6 +29,7 @@
     "request": "^2.79.0",
     "rxjs": "^5.1.0",
     "tabletojson": "^1.0.1",
+    "toastr": "^2.1.4",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

@@ -10,14 +10,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import 'rxjs/add/operator/map';
 import { Popup } from 'ng2-opd-popup';
 import { ShowInvoiceComponent } from "../show-invoice/show-invoice.component";
-// import { EventEmitter } from 'events';
-
-
-// @Component({
-//   selector: 'app-product',
-//   templateUrl: './product-sell.component.html',
-//   styleUrls: ['./product-sell.component.css']
-// })
+import { ToasterService } from '../toaster-service.service';
 
 @Component({
   selector: 'app-product-sell',
@@ -150,7 +143,7 @@ export class ProductSellComponent implements OnInit {
       this.invoiceId = res.text();
       this.message = String(this.invoiceId);
       this.notify.emit(this.message);
-      this.sendMessage();
+     // this.sendMessage();
 
       if (res.status < 200 || res.status >= 300) {
         throw new Error('This request has failed ' + res.status);
@@ -166,19 +159,15 @@ export class ProductSellComponent implements OnInit {
     this.priceProduct = null;
     this.quantityProduct = null;
     this.productSellObj = [];
-    
-
 debugger
-    var asd = this.getAllProducts(function () {
-
-      this.router.navigate(['/']);
-    });
-    debugger
+    
     this.totalAmount = null;
     this.isAdded = true;
 
-  }
+    this.success();
 
+  }
+  
   //update product quantity
 
   finalProducts(item) {
