@@ -4,7 +4,7 @@
   <a></a>
   <a></a>
   <a></a>
-
+  <a [routerLink]="['']" style="font-size: 15px;" class="w3-bar-item w3-button"> First Page</a>
   <a [routerLink]="['/product']" style="font-size: 15px;" class="w3-bar-item w3-button"> Add Product</a>
   <a [routerLink]="['/sellProducts']" style="font-size: 15px;" class="w3-bar-item w3-button"> Product Sell</a>
   <a [routerLink]="['/updateQuntity']" style="font-size: 15px;" class="w3-bar-item w3-button"> Update Quantity</a>
@@ -35,10 +35,10 @@
   <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="updateQuantity(updateProduct)">Finish</button> 
 </div>
 
-<div *ngIf="asd" align="center">
+<!-- <div *ngIf="asd" align="center">
   <h1>Sucessfully updated</h1>
 
-</div>
+</div> -->
 <!-- <popup  (confirmClick)="YourConfirmEvent()" >
  Your Product Updated Successfully
 </popup> -->

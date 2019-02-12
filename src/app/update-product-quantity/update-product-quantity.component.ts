@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import 'rxjs/add/operator/map';
 import { Popup } from 'ng2-opd-popup';
+import { ToasterService } from '../toaster-service.service';
 
 @Component({
   selector: 'app-update-product-quantity',
@@ -17,56 +18,57 @@ import { Popup } from 'ng2-opd-popup';
 })
 export class UpdateProductQuantityComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: Http, private popup: Popup) { }
+  constructor(private toasterService: ToasterService, private router: Router, private route: ActivatedRoute, private http: Http, private popup: Popup) { }
 
 
-  products=[];
-  updatedItem=[];
-  productObj:object = {};
-  asd:boolean=false;
+  products = [];
+  updatedItem = [];
+  productObj: object = {};
+  asd: boolean = false;
   //id:number;
-  updateProduct={};
-  updatedQuantity:number;
-  private headers = new Headers({ 'Content-Type': 'application/json'});
+  updateProduct = {};
+  updatedQuantity: number;
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+
+  success() {
+    this.toasterService.Success("Successfully Updated Product ", "Update Product");
+  }
 
   getAllProducts = function () {
 
     this.http.get("http://localhost:3000/products").subscribe(
       (res: Response) => {
         this.products = res.json();
-
-
       }
     )
 
   }
 
- 
   updateQuantity(updateProductQuan) {
-    
-debugger
+
+    debugger
+    this.updateProduct = {};
     this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
-    this.updatedQuantity=this.updateProduct[0].Quantity + updateProductQuan.quantity;
+    this.updatedQuantity = this.updateProduct[0].Quantity + updateProductQuan.quantity;
     this.productObj = {
       'id': this.updateProduct[0].id,
       "name": updateProductQuan.name,
       "Quantity": this.updatedQuantity
     };
-    
-    const url = `${"http://localhost:3000/products"}`;
-    this.http.put(url, JSON.stringify(this.productObj), {headers: this.headers})
-      .toPromise()
-      .then(() => {
+
+    const url = `${"http://localhost:3000/updateProductQuantity"}`;
+    this.http.put(url, JSON.stringify(this.productObj), { headers: this.headers }).subscribe(
+      (res: Response) => {
+        
         this.asd=true;
-        this.router.navigate(['/']);
-        // this.router.navigate(['/']);
-      });
-      this.asd=true;
-      this.updateProduct={};
-      // this.popup.show(this.popup.options);
+        this.getAllProducts();
+      }
+    )
+    console.log("update status" + this.asd);
+    this.success();
   }
 
-  YourConfirmEvent(){
+  YourConfirmEvent() {
     this.router.navigate(['/']);
   }
 

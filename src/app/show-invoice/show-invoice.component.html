@@ -14,27 +14,49 @@
 
 <body>
 
-    
-        <!-- <app-product-sell ></app-product-sell> -->
-        <!-- <app-product-sell [message12]="message12"></app-product-sell> -->
-        
+
+    <!-- <app-product-sell ></app-product-sell> -->
+    <!-- <app-product-sell [message12]="message12"></app-product-sell> -->
+
     <div class="invoice-box" id="obrz">
         <table cellpadding="0" cellspacing="0" style="border: 1px solid white; ">
             <tr class="top" style="border: 1px solid white;">
                 <td colspan="5" style="border: 1px solid white;">
                     <table style="border: 1px solid white;">
                         <tr style="border: 1px solid white;">
-                            <td class="title" style="border: 1px solid white;">
+                            <td class="border" style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: 15px;">
 
-                                <img src="assets/images/logo3.png" style="width:100%; max-width:300px;">
-                            </td>
-                          
+                                <p style=" color: #FFA07A; line-height: 0.5">𝔸𝕃 𝔹𝔸ℝ𝔸𝕂𝔸 𝔼𝕃𝔼ℂ𝕋ℝ𝕆ℕ𝕀ℂ𝕊 </p>
+                                нσℓу мαккαн υтαвιууαн αℓ αи∂αℓυѕ <br>
+                                Mob: 0542048086-0534697283
 
-                            <td style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: px;">
-                                Invoice #: {{lastProductInvoice }}<br>
-                                Created:
-                                {{todayDate | date:'MM/dd/yyyy'}}
+
                             </td>
+
+
+                            <td style="border: 1px solid white; font-weight:bold; vertical-align: bottom; font-size: 18px;">
+                               
+                                <p style=" color: #FFA07A; line-height: 0.5"> البرك الكتر ؤ نيا ت </p>
+                                مكت العتيبه لا ند لسي<br>
+                                جو ال/٣٨٢٧٩٦٤٣٥٠ ـ ٦٨ ٠ ٠٢٤٥
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+           
+            <tr style="border: 1px solid white;" class="information">
+                <td colspan="5" style="border: 1px solid white;">
+                    <table style="border: 1px solid white;">
+                        <tr>
+                            <div class="col-sm-7" style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;">Customer
+                                :<strong></strong></div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4" style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;">Date
+                                <strong>{{todayDate | date:'M-d-yy, h:mm a '}}</strong></div>
+
                         </tr>
                     </table>
                 </td>
@@ -44,28 +66,34 @@
                 <td colspan="5" style="border: 1px solid white;">
                     <table style="border: 1px solid white;">
                         <tr>
-                            <td style="border: 1px solid white; font-size: 15px;">
-                                AL BARAKA ELECTRONICS.<br>
-                                HOLY MAKKAH utaybiyyah al Andalus<br>
-                                Mob: 0542048086 - 0534697283
-                            </td>
+                            <div class="col-sm-2 " style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;" align="center"><strong>Cash</strong></div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2" style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;" align="center"><strong>Credit</strong></div>
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-4" style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;">Invoice
+                                No <strong>{{lastProductInvoice}}</strong></div>
 
-                            <td style="border: 1px solid white; font-size: 15px;">
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
-                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border: 1px solid white;" class="information">
+                <td colspan="5" style="border: 1px solid white;">
+                    <table style="border: 1px solid white;">
+                        <tr>
+
                         </tr>
                     </table>
                 </td>
             </tr>
 
 
+
             <tr style="border: 1px solid white; background: #eee;
             border-bottom: 1px solid #ddd;" align="center"
                 bgcolor="#FF0000">
                 <td style="border: 1px solid white;">
-                    S No.
+                    No.
                 </td>
                 <td style="border: 1px solid white;">
                     Item
@@ -75,14 +103,14 @@
                 </td>
 
                 <td style="border: 1px solid white;">
-                    Price
+                    Rate
                 </td>
                 <td style="border: 1px solid white;">
                     Amount
                 </td>
             </tr>
 
-           
+
 
             <tr align="center" *ngFor="let product of sellProducts">
 
@@ -113,20 +141,21 @@
                 <td style="border: 1px solid white;"></td>
                 <td style="font-size: 15px; border: 1px solid white;" align="right">Total Amount =</td>
 
-                <td style="border: 1px solid;border: 2px solid;border-radius: 8px;" align="center">
+                <!-- <td style="border: 1px solid;border: 2px solid;border-radius: 8px;" align="center">
                     {{totalAmount}}
-                </td>
+                </td> -->
+                <div class="col-sm-7" style="border: 2px solid ; border-color:#AED6F1; border-radius: 8px;font-size: 15px;" align="center">
+                        <strong> {{totalAmount}}</strong></div>
             </tr>
 
             <tr class="total">
-                <td style="border: 1px solid white;"></td>
-                <td style="border: 1px solid white;"></td>
-                <td style="border: 1px solid white;"></td>
-                <td style="font-size: 15px;border: 1px solid white;" align="right">VAT =</td>
+                    <td style="border: 1px solid white;"></td>
+                    <td style="border: 1px solid white;"></td>
+                    <td style="border: 1px solid white;"></td>
+                    <td style="font-size: 15px; border: 1px solid white;" align="right">VAT =</td>
 
-                <td style="font-size: 15px;border: 1px solid ;" align="center">
-
-                </td>
+                    <div class="col-sm-7" style="border: 2px solid ; color: white;border-color:#AED6F1; border-radius: 8px;font-size: 15px;" align="center">
+                            <strong> 0</strong></div>
             </tr>
             <tr class="total">
                 <td style="border: 1px solid white;"></td>
@@ -134,9 +163,8 @@
                 <td style="border: 1px solid white;"></td>
                 <td style="font-size: 15px;border: 1px solid white;" align="right">Net Amount =</td>
 
-                <td style="border: 1px solid; border: 2px solid;border-radius: 8px;" align="center">
-
-                </td>
+                <div class="col-sm-7" style="border: 2px solid ; color: white; border-color:#AED6F1; border-radius: 8px;font-size: 15px;" align="center">
+                        <strong> 0</strong></div>
             </tr>
 
 
@@ -149,44 +177,7 @@
     <!-- <div id="content"></div> -->
     <button (click)="downloadPdf()">Create PDF</button>
 
-     <!-- <app-product-sell (messageEvent)="receiveMessage($event)"></app-product-sell> -->
-     <!-- Message: {{message123}} -->
-    <!-- <button type="button" mdbBtn color="primary" mdbWavesEffect align="right" (click)="pdfToHTML()">Create PDF</button> -->
-    <!-- </div> -->
-    <!-- <div >
-        <br><br>
-        <p class="float-right font-weight-bold">Образац ЗПО</p>
-        <br>
-        <p class="float-left font-weight-bold">Подаци о обвезнику:</p>
-
-        <br>
-
-        <div class="row" style="width:100%">
-            <div class="col-md-2">
-                <p>Порески обвезник:</p>
-            </div>
-            <div class="col-md-10"><input value="{{userModel.imeIprezime}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
-                    style="border-bottom: 1px solid black"></div>
-            <div class="col-md-2">
-                <p>ПИБ:</p>
-            </div>
-            <div class="col-md-10"><input value="{{userModel.PIB}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
-                    style="border-bottom: 1px solid black"></div>
-            <div class="col-md-2">
-                <p>Адреса:</p>
-            </div>
-            <div class="col-md-10"><input value="{{userModel.ulica + ' ' + userModel.broj + ' ' + userModel.grad}}"
-                    type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
-                    style="border-bottom: 1px solid black"></div>
-            <div class="col-md-2">
-                <p>Општина:</p>
-            </div>
-            <div class="col-md-10"><input value="{{userModel.opstina}}" type="text" class="form-control form-control-sm border-1 border-top-0 border-right-0 border-left-0"
-                    style="border-bottom: 1px solid black"></div>
-        </div>
-        <br>
-        <button (click)="downloadPdf()">Download PDF</button>
-    </div> -->
+    
 </body>
 
 </html>

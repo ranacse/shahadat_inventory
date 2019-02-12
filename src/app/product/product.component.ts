@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { ToasterService } from '../toaster-service.service';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +9,7 @@ import { Http, Response, Headers } from '@angular/http';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private http: Http) { }
+  constructor(private toasterService: ToasterService,private http: Http) { }
   confirmationString:string = "New product has been added";
   failConfirmationString:string = "Failed to add Product";
   isAdded: boolean = false;
@@ -16,6 +17,10 @@ export class ProductComponent implements OnInit {
   finalProduct:object={};
   // productName:any;
   // productQuantity:any;
+
+  success() {
+    this.toasterService.Success("Successfully Product Added","Add Product");
+  }
 
   addNewProduct = function(product) {
     
@@ -27,9 +32,11 @@ export class ProductComponent implements OnInit {
     this.http.post("http://localhost:3000/products/", this.productObj).subscribe((res:Response) => {
       debugger
       if(res.status==200){
-        this.isAdded = true;
+        
+        //this.isAdded = true;
         this.productName=null;
         this.productQuantity=null;
+        this.success();
       }
      
 

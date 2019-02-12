@@ -39,9 +39,12 @@ export class ShowInvoiceComponent implements OnInit {
   fullAmount = 0;
   lastProductInvoice: any;
   totalAmount:any=0;
+  noValue='';
+  dateFormat:any;
 
   myDate = new Date();
   public todayDate = new Date(Date.parse(Date()));
+  FromDate = this.myDate.getFullYear() + '-' + ('0' + (this.myDate.getMonth() + 1)).slice(-2) + '-' + ('0' + this.myDate.getDate()).slice(-2);
 
 
   constructor(private http: Http) { }
@@ -61,11 +64,15 @@ export class ShowInvoiceComponent implements OnInit {
 
   downloadPdf() {
     debugger
+   // let dateFormat = require('dateformat');
     var date = new Date();
-    var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2)+ ':' + ('0' + date.getMinutes()).slice(-2);
+    
+    //var FromDate=this.dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    //dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 
     let doc = new jsPDF();
-    var pdfName = "Invoice_".concat(this.invoiceNumber.toString()).concat("_Date_").concat(FromDate).concat(".pdf");
+    var pdfName = "Invoice_".concat(this.invoiceNumber.toString()).concat("_Date_").concat(this.FromDate).concat(".pdf");
 
     doc.addHTML(document.getElementById("obrz"), function () {
       doc.save(pdfName);
@@ -99,7 +106,8 @@ export class ShowInvoiceComponent implements OnInit {
             this.totalAmount = this.totalAmount + this.sellProducts[i].TotalSellAmount ;
             this.sellProducts[i].sellId=i+1;
           }
-          
+
+          this.downloadPdf();
 debugger
         })
           

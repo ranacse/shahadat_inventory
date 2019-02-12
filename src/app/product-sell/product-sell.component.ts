@@ -10,6 +10,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import 'rxjs/add/operator/map';
 import { Popup } from 'ng2-opd-popup';
 import { ShowInvoiceComponent } from "../show-invoice/show-invoice.component";
+import { ToasterService } from '../toaster-service.service';
 // import { EventEmitter } from 'events';
 
 
@@ -21,14 +22,14 @@ import { ShowInvoiceComponent } from "../show-invoice/show-invoice.component";
 
 @Component({
   selector: 'app-product-sell',
-  
+
   templateUrl: './product-sell.component.html',
   // template: `<button (click)="sendMessage()">Send Message</button>`,
   styleUrls: ['./product-sell.component.css']
 })
 export class ProductSellComponent implements OnInit {
 
-  constructor(private router: Router, private http: Http, private popup: Popup) { }
+  constructor(private toasterService: ToasterService, private router: Router, private http: Http, private popup: Popup) { }
 
 
   // @Output() messageEvent = new EventEmitter<any>();
@@ -39,38 +40,41 @@ export class ProductSellComponent implements OnInit {
   errorToChoseProduct: string = "Product already choosen"
   isAdded: boolean = false;
   products = [];
+  finalEachProduct = [];
   productsAllForSell = [];
   productSellObj = [];
   updateProductObj = [];
   updateSingleProductObject = [];
   updateObj = [];
   productObj: object = {};
+  updateProductQuantity=[];
   totalAmount = 0;
   errorMessage = false;
-  invoiceId:any;
+  invoiceId: any;
   message: string = "Hola Mundo!"
- 
+
   i: any = 0;
   index: any;
+  remainQuantity: any;
 
   finalProduct: any = {};
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
 
- // message: string;
-  
+  // message: string;
+
   message12 = 'from product Sell!';
-  invoiceIdFromNode:string;
-  
+  invoiceIdFromNode: string;
+
   count: number = 0;
-  
 
 
 
-  sendMessage() {
-    debugger
-    this.messageEvent.emit(this.invoiceId);
+  success() {
+
+    this.toasterService.Success("Successfully Got All Product", "Set Product");
   }
+
   sellProducts = function (newProduct) {
 
     let selectedProduct = this.products.filter(x => x.name == newProduct.name);
@@ -89,42 +93,147 @@ export class ProductSellComponent implements OnInit {
 
       this.index = this.searchTotalQuantityForEachProduct.findIndex(presentProduct => presentProduct.name === newProduct.name);
 
-      let remainQuantity = this.searchTotalQuantityForEachProduct[this.index].Quantity - newProduct.quantityProduct;
+      this.remainQuantity = this.searchTotalQuantityForEachProduct[this.index].Quantity - newProduct.quantityProduct;
       this.amount = newProduct.priceProduct * newProduct.quantityProduct;
 
       this.totalAmount = this.totalAmount + this.amount;
 
       this.productSellObj.push({
         id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct,
-        remainQuantity: remainQuantity, Quantity: newProduct.quantityProduct, totalPrice: this.amount
+        remainQuantity: this.remainQuantity, Quantity: newProduct.quantityProduct, totalPrice: this.amount
       });
 
-      this.updateProductObj.push({ id: this.productsAllForSell[this.index].id, name: newProduct.name, Quantity: remainQuantity });
+      // price: pro[i].Price, quantity: pro[i].Quantity, TotalSellAmount: pro[i].totalPrice, sellDate: dateTime 
+      this.updateProductObj.push({ id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, amount: this.amount });
 
 
       //new code
 
       this.index2 = this.searchTotalQuantityForEachProduct.findIndex(presentProduct => presentProduct.name === newProduct.name);
-      //this.products.splice(this.index2, 1);
+
       this.products = this.products.filter(function (obj) {
         return obj.name !== newProduct.name;
       });
 
-
       this.productsAllForSell[this.index].Quantity = this.productsAllForSell[this.index].Quantity - newProduct.quantityProduct;
-
-      // this.priceProduct = '';
-      // this.quantityProduct = '';
-      // this.nameProduct = null;
       this.finalProduct = {};
       this.index = null;
-      
+
 
     }   //end of first else
 
-    // this.getAllProducts();
   }
 
+
+
+
+
+  submitTotalSell = function (id) {
+
+    console.log("start function  .........");
+
+    this.http.post("http://localhost:3000/sellProducts/", this.updateProductObj).subscribe((res: Response) => {
+
+      if (res.status == 200) {
+
+        this.isAdded = true;
+        this.productName = null;
+        this.productQuantity = null;
+        // for(let i=0;i<this.updateProductObj.length;i++){
+
+        this.finalProducts(this.updateProductObj);
+        //}
+
+        this.success();
+      }
+    })
+
+    this.priceProduct = null;
+    this.quantityProduct = null;
+    this.productSellObj = [];
+
+    this.totalAmount = null;
+    this.isAdded = true;
+    this.getAllProducts();
+    // this.updateProductObj=null;
+
+  }
+
+  //update product quantity
+
+  finalProducts(item) {
+    debugger
+    this.updateObj = [];
+    for (let i = 0; i < item.length; i++) {
+
+
+
+      this.index = this.products.findIndex(presentProduct => presentProduct.name === item[i].name);
+
+      this.remainQuantity = this.finalEachProduct[this.index].Quantity - item[i].Quantity;
+
+      this.updateProductQuantity.push({id : item[i].id, name:item[i].name, Quantity:this.remainQuantity});
+     
+      //   'id': item[i].id,
+      //   "name": item[i].name,
+      //   "Quantity": this.remainQuantity
+      // };
+
+      this.isAdded = true;
+      console.log("finish update : " + " ........start update quantity function  .........");
+    }
+
+      // const url = `${"http://localhost:3000/products"}`;
+      var body = JSON.stringify(this.updateObj);
+
+      var headerOptions = new Headers({ 'Content-Type': 'application/json' });
+      var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
+
+      let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: cpHeaders });
+
+
+      debugger
+      const url = `${"http://localhost:3000/products"}`;
+      this.http.put(url, JSON.stringify(this.updateProductQuantity), { headers: this.headers })
+        .subscribe(data => {
+          debugger
+          // this.updateProductQuantity={};
+          //  this.getAllProducts();
+          // this.resetForm(form);
+          // this.employeeService.getEmployeeList();
+          // this.toastr.info('Record Updated Successfully!', 'Employee Register');
+        });
+      // .toPromise()
+      // .then(() => {
+      //   // this.getAllProducts();
+      //   this.sendMessage();
+      //   //this.router.navigate(['/']);
+      // });
+
+      // this.employeeService.putEmployee(form.value.EmployeeID, form.value)
+      // .subscribe(data => {
+      //   this.resetForm(form);
+      //   this.employeeService.getEmployeeList();
+      //   this.toastr.info('Record Updated Successfully!', 'Employee Register');
+      // });
+
+   // }
+  }
+  getAllProducts = function () {
+
+    this.http.get("http://localhost:3000/products").subscribe(
+      (res: Response) => {
+        this.products = res.json();
+        this.productsAllForSell = res.json();
+        this.searchTotalQuantityForEachProduct = res.json();
+        this.finalEachProduct = res.json();
+
+
+      }
+    )
+
+  }
 
   deleteProductFromList(id) {
 
@@ -140,103 +249,6 @@ export class ProductSellComponent implements OnInit {
   }
 
 
-  //   start testing
-  submitTotalSell = function (id) {
-
-    console.log("start function  .........");
-
-    this.http.post("http://localhost:3000/sellProducts/", this.productSellObj).map(res => {
-      debugger
-      this.invoiceId = res.text();
-      this.message = String(this.invoiceId);
-      this.notify.emit(this.message);
-      this.sendMessage();
-
-      if (res.status < 200 || res.status >= 300) {
-        throw new Error('This request has failed ' + res.status);
-      }
-      else {
-        console.log("going to update quantity  .........")
-      }
-    })
-      .subscribe(
-        (data) => this.data = this.invoiceId, // Reach here if res.status >= 200 && <= 299
-        (err) => this.error = err); // Reach here if fails
-
-    this.priceProduct = null;
-    this.quantityProduct = null;
-    this.productSellObj = [];
-    
-
-debugger
-    var asd = this.getAllProducts(function () {
-
-      this.router.navigate(['/']);
-    });
-    debugger
-    this.totalAmount = null;
-    this.isAdded = true;
-
-  }
-
-  //update product quantity
-
-  finalProducts(item) {
-
-    this.updateObj = [];
-
-    this.productObj = {
-      'id': item.id,
-      "name": item.name,
-      "Quantity": item.Quantity
-    };
-
-    this.isAdded = true;
-    console.log("finish update : " + " ........start update quantity function  .........");
-
-    // const url = `${"http://localhost:3000/products"}`;
-    var body = JSON.stringify(this.updateObj);
-
-    var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
-
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: cpHeaders });
-
-
-
-    const url = `${"http://localhost:3000/products"}`;
-    this.http.put(url, JSON.stringify(this.productObj), { headers: this.headers })
-      .toPromise()
-      .then(() => {
-        // this.getAllProducts();
-        this.sendMessage();
-        //this.router.navigate(['/']);
-      });
-
-    // this.getAllProducts();
-    //this.sendMessage();
-
-
-  }
-
-
-
-  getAllProducts = function () {
-
-    this.http.get("http://localhost:3000/products").subscribe(
-      (res: Response) => {
-        this.products = res.json();
-        this.productsAllForSell = res.json();
-        this.searchTotalQuantityForEachProduct = res.json();
-
-
-      }
-    )
-
-  }
-
- 
 
   ngOnInit() {
     this.message12 = 'from product Sell!';

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {PopupModule} from 'ng2-opd-popup' ;
+import { ToasterService} from './toaster-service.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -38,7 +39,7 @@ import { UpdateProductQuantityComponent } from './update-product-quantity/update
     ]),
     PopupModule.forRoot(),
   ],
-  providers: [],
+  providers: [ToasterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

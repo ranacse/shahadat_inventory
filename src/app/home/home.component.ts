@@ -34,13 +34,6 @@ export class HomeComponent implements OnInit {
     
   }
 
-  updateProductQuantity(){
-    
-  }
-
-
-
-
   deleteProduct = function (id) {
     
     if (confirm("Are you sure?")) {
