@@ -1,4 +1,4 @@
-<!-- <a routerLink="/"> Front Page </a> -->
+
 <div class="sidenav">
 
   <a></a>
@@ -133,8 +133,7 @@
       <td align="center">{{singleProduct.totalPrice}}</td>
 
       <td><button type="submit" class="btn btn-default" (click)="deleteProductFromList(singleProduct.id)">Delete</button></td>
-      <!-- </div>
-        </div> -->
+      
 
     </tr>
 
@@ -153,7 +152,6 @@
 </div>
 
 <br>
-<!-- <h3 *ngIf="isAdded">{{confirmationString}}</h3> -->
 
 <div *ngIf="isAdded" align="center">
   <a routerLink="/invoice" (click)="sendMessage()"> Show invoice </a>

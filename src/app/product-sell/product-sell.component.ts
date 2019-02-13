@@ -11,28 +11,19 @@ import 'rxjs/add/operator/map';
 import { Popup } from 'ng2-opd-popup';
 import { ShowInvoiceComponent } from "../show-invoice/show-invoice.component";
 import { ToasterService } from '../toaster-service.service';
-// import { EventEmitter } from 'events';
 
-
-// @Component({
-//   selector: 'app-product',
-//   templateUrl: './product-sell.component.html',
-//   styleUrls: ['./product-sell.component.css']
-// })
 
 @Component({
   selector: 'app-product-sell',
 
   templateUrl: './product-sell.component.html',
-  // template: `<button (click)="sendMessage()">Send Message</button>`,
+ 
   styleUrls: ['./product-sell.component.css']
 })
 export class ProductSellComponent implements OnInit {
 
   constructor(private toasterService: ToasterService, private router: Router, private http: Http, private popup: Popup) { }
 
-
-  // @Output() messageEvent = new EventEmitter<any>();
   @Output() messageEvent = new EventEmitter<string>();
 
 
@@ -60,8 +51,6 @@ export class ProductSellComponent implements OnInit {
   finalProduct: any = {};
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-
-  // message: string;
 
   message12 = 'from product Sell!';
   invoiceIdFromNode: string;
@@ -102,13 +91,8 @@ export class ProductSellComponent implements OnInit {
         id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct,
         remainQuantity: this.remainQuantity, Quantity: newProduct.quantityProduct, totalPrice: this.amount
       });
-
-      // price: pro[i].Price, quantity: pro[i].Quantity, TotalSellAmount: pro[i].totalPrice, sellDate: dateTime 
+ 
       this.updateProductObj.push({ id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, amount: this.amount });
-
-
-      //new code
-
       this.index2 = this.searchTotalQuantityForEachProduct.findIndex(presentProduct => presentProduct.name === newProduct.name);
 
       this.products = this.products.filter(function (obj) {
@@ -120,12 +104,9 @@ export class ProductSellComponent implements OnInit {
       this.index = null;
 
 
-    }   //end of first else
+    }   
 
   }
-
-
-
 
 
   submitTotalSell = function (id) {
@@ -139,10 +120,8 @@ export class ProductSellComponent implements OnInit {
         this.isAdded = true;
         this.productName = null;
         this.productQuantity = null;
-        // for(let i=0;i<this.updateProductObj.length;i++){
-
         this.finalProducts(this.updateProductObj);
-        //}
+
 
         this.success();
       }
@@ -155,14 +134,13 @@ export class ProductSellComponent implements OnInit {
     this.totalAmount = null;
     this.isAdded = true;
     this.getAllProducts();
-    // this.updateProductObj=null;
+
 
   }
 
-  //update product quantity
 
   finalProducts(item) {
-    debugger
+    
     this.updateObj = [];
     for (let i = 0; i < item.length; i++) {
 
@@ -173,17 +151,12 @@ export class ProductSellComponent implements OnInit {
       this.remainQuantity = this.finalEachProduct[this.index].Quantity - item[i].Quantity;
 
       this.updateProductQuantity.push({id : item[i].id, name:item[i].name, Quantity:this.remainQuantity});
-     
-      //   'id': item[i].id,
-      //   "name": item[i].name,
-      //   "Quantity": this.remainQuantity
-      // };
+
 
       this.isAdded = true;
       console.log("finish update : " + " ........start update quantity function  .........");
     }
 
-      // const url = `${"http://localhost:3000/products"}`;
       var body = JSON.stringify(this.updateObj);
 
       var headerOptions = new Headers({ 'Content-Type': 'application/json' });
@@ -193,32 +166,13 @@ export class ProductSellComponent implements OnInit {
       let options = new RequestOptions({ headers: cpHeaders });
 
 
-      debugger
+      
       const url = `${"http://localhost:3000/products"}`;
       this.http.put(url, JSON.stringify(this.updateProductQuantity), { headers: this.headers })
         .subscribe(data => {
-          debugger
-          // this.updateProductQuantity={};
-          //  this.getAllProducts();
-          // this.resetForm(form);
-          // this.employeeService.getEmployeeList();
-          // this.toastr.info('Record Updated Successfully!', 'Employee Register');
+
         });
-      // .toPromise()
-      // .then(() => {
-      //   // this.getAllProducts();
-      //   this.sendMessage();
-      //   //this.router.navigate(['/']);
-      // });
 
-      // this.employeeService.putEmployee(form.value.EmployeeID, form.value)
-      // .subscribe(data => {
-      //   this.resetForm(form);
-      //   this.employeeService.getEmployeeList();
-      //   this.toastr.info('Record Updated Successfully!', 'Employee Register');
-      // });
-
-   // }
   }
   getAllProducts = function () {
 
@@ -228,7 +182,6 @@ export class ProductSellComponent implements OnInit {
         this.productsAllForSell = res.json();
         this.searchTotalQuantityForEachProduct = res.json();
         this.finalEachProduct = res.json();
-
 
       }
     )
@@ -247,7 +200,6 @@ export class ProductSellComponent implements OnInit {
     this.products.splice(length, 0, tempoProduct);
 
   }
-
 
 
   ngOnInit() {

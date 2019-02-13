@@ -21,17 +21,17 @@ export class UpdateProductComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: Http) { }
 
   updateProduct(product) {
-    debugger
+    
     this.productObj = {
       "name": product.name,
       "Price": product.price
     };
-    debugger
+    
     const url = `${"http://localhost:3000/products"}/${this.id}`;
     this.http.put(url, JSON.stringify(this.productObj), {headers: this.headers})
       .toPromise()
       .then(() => {
-        //this.router.navigate(['/']);
+
       })
   }
 

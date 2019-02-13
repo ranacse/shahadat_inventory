@@ -18,20 +18,15 @@ export class HomeComponent implements OnInit {
   products = [];
 
   fetchData = function () {
-    debugger
+    
     this.http.get("http://localhost:3000/products").subscribe(
       (res: Response) => {
         this.products = res.json();
-        
-        
-        
+               
       }
       
       
     )
-   
-    debugger
-    
   }
 
   deleteProduct = function (id) {
@@ -46,11 +41,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger
-    this.fetchData();
-  //   if(this.products.length==0){
-  //     location.reload(true);
     
-  // }
+    this.fetchData();
+
   }
 }

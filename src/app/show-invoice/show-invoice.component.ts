@@ -14,18 +14,11 @@ import 'tabletojson';
 @Component({
   selector: 'app-show-invoice',
   templateUrl: './show-invoice.component.html',
-  // template: '  Message: {{message}} <app-product-sell (messageEvent)="receiveMessage($event)"></app-product-sell>',
   styleUrls: ['./show-invoice.component.css']
 })
 
 
 export class ShowInvoiceComponent implements OnInit {
-
-  // @ViewChild('content') content: ElementRef;
-  // @ViewChild(ProductSellComponent) child;
-
-  // @ViewChild(ProductSellComponent)
-  // private numberComponent: ProductSellComponent;
 
 
   productForSell = [];
@@ -52,7 +45,7 @@ export class ShowInvoiceComponent implements OnInit {
   message123: any;
 
   receiveMessage($event) {
-    debugger
+    
     this.message123 = $event;
   }
 
@@ -63,13 +56,9 @@ export class ShowInvoiceComponent implements OnInit {
 
 
   downloadPdf() {
-    debugger
-   // let dateFormat = require('dateformat');
+
     var date = new Date();
     var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2)+ ':' + ('0' + date.getMinutes()).slice(-2);
-    
-    //var FromDate=this.dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-    //dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 
     let doc = new jsPDF();
     var pdfName = "Invoice_".concat(this.invoiceNumber.toString()).concat("_Date_").concat(this.FromDate).concat(".pdf");
@@ -108,14 +97,12 @@ export class ShowInvoiceComponent implements OnInit {
           }
 
           this.downloadPdf();
-debugger
+
         })
           
       }
     )
 
-    debugger
-    // var asd=this.child.invoiceId;
 
 
   }

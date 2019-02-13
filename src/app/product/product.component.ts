@@ -15,8 +15,7 @@ export class ProductComponent implements OnInit {
   isAdded: boolean = false;
   productObj:object = {};
   finalProduct:object={};
-  // productName:any;
-  // productQuantity:any;
+
 
   success() {
     this.toasterService.Success("Successfully Product Added","Add Product");
@@ -28,12 +27,11 @@ export class ProductComponent implements OnInit {
       "name": product.name,
       "Quantity": product.quantityProduct
     }
-    debugger
+    
     this.http.post("http://localhost:3000/products/", this.productObj).subscribe((res:Response) => {
-      debugger
+      
       if(res.status==200){
-        
-        //this.isAdded = true;
+  
         this.productName=null;
         this.productQuantity=null;
         this.success();

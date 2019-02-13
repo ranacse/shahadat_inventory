@@ -46,7 +46,7 @@ export class UpdateProductQuantityComponent implements OnInit {
 
   updateQuantity(updateProductQuan) {
 
-    debugger
+    
     this.updateProduct = {};
     this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
     this.updatedQuantity = this.updateProduct[0].Quantity + updateProductQuan.quantity;
@@ -73,9 +73,7 @@ export class UpdateProductQuantityComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   this.id = +params['id'];
-    // });
+
     this.getAllProducts();
   }
 
