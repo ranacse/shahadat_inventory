@@ -78,19 +78,19 @@
 
       </div>
     </div>
-    <div class="col-sm-3">
-      <div class="container_table">
+    <div class="col-sm-3" >
+      <div class="Content" >
         <h2 style="font-size: 15px;" align="center"><strong>Present Product Status</strong></h2>
 
-        <table align="center">
-          <th>ID</th>
+        <table align="center" class="table table-fixed">
+          <th>No</th>
           <th>Name</th>
           <th>Quantity</th>
 
-          <tr *ngFor="let product of productsAllForSell">
-            <td style="font-size: 15px;">{{product.id}}</td>
-            <td style="font-size: 15px;">{{product.name}}</td>
-            <td style="font-size: 15px;">{{product.Quantity}}</td>
+          <tr *ngFor="let product of productsAllForSell; let i= index">
+            <td style="font-size: 15px;"> {{i+1}} </td>
+            <td style="font-size: 15px;"> {{product.name}}</td>
+            <td style="font-size: 15px;"> {{product.Quantity}}</td>
 
           </tr>
         </table>

@@ -30,8 +30,9 @@
       <th>Quantity</th>
       <th></th>
       
-      <tr *ngFor="let product of products">
-        <td>{{product.id}}</td>
+      <tr *ngFor="let product of products;  let i= index">
+        <td> {{i+1}} </td>
+        <!-- <td>{{product.id}}</td> -->
         <td>{{product.name}}</td>
         <td>{{product.Quantity}}</td>
        
