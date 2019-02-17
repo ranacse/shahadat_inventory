@@ -27,6 +27,10 @@ export class UpdateProductQuantityComponent implements OnInit {
   asd: boolean = false;
   //id:number;
   updateProduct = {};
+  updateProductQuan ={
+    name:'',
+    quantity:''
+  };
   updatedQuantity: number;
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
@@ -43,29 +47,41 @@ export class UpdateProductQuantityComponent implements OnInit {
     )
 
   }
+  
 
-  updateQuantity(updateProductQuan) {
-
-    
-    this.updateProduct = {};
-    this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
-    this.updatedQuantity = this.updateProduct[0].Quantity + updateProductQuan.quantity;
-    this.productObj = {
-      'id': this.updateProduct[0].id,
-      "name": updateProductQuan.name,
-      "Quantity": this.updatedQuantity
-    };
-
+  updateApi(){
     const url = `${"http://localhost:3000/updateProductQuantity"}`;
     this.http.put(url, JSON.stringify(this.productObj), { headers: this.headers }).subscribe(
-      (res: Response) => {
-        
-        this.asd=true;
-        this.getAllProducts();
-      }
     )
-    console.log("update status" + this.asd);
+    
+  }
+
+  notificationMessage(){
     this.success();
+  }
+  async updateQuantity(updateProductQuan) {
+debugger
+ 
+      this.updateProduct = {};
+      if(updateProductQuan.quantity== undefined){
+        alert("please input Quantoty");
+      }
+
+      else{
+        this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
+        this.updatedQuantity = this.updateProduct[0].Quantity + updateProductQuan.quantity;
+        this.productObj = {
+          'id': this.updateProduct[0].id,
+          "name": updateProductQuan.name,
+          "Quantity": this.updatedQuantity
+        };
+        await this.updateApi();
+        await this.notificationMessage();
+      }
+      
+  
+    
+    
   }
 
   YourConfirmEvent() {
