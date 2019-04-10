@@ -26,7 +26,11 @@ export class UpdateProductQuantityComponent implements OnInit {
   productObj: object = {};
   asd: boolean = false;
   //id:number;
-  updateProduct = {};
+  updatePro = {};
+  updateProduct ={
+    name:'',
+    quantity:null
+  };
   updateProductQuan ={
     name:'',
     quantity:''
@@ -39,7 +43,7 @@ export class UpdateProductQuantityComponent implements OnInit {
   }
 
   getAllProducts = function () {
-
+    
     this.http.get("http://localhost:3000/products").subscribe(
       (res: Response) => {
         this.products = res.json();
@@ -50,10 +54,13 @@ export class UpdateProductQuantityComponent implements OnInit {
   
 
   updateApi(){
+debugger
     const url = `${"http://localhost:3000/updateProductQuantity"}`;
-    this.http.put(url, JSON.stringify(this.productObj), { headers: this.headers }).subscribe(
-    )
-    
+    this.http.put(url, JSON.stringify(this.productObj), { headers: this.headers }).subscribe( data  => { 
+      console.log("PUT Request is successful ", data);
+    },error  => {
+      console.log("Rrror", error);
+    });
   }
 
   notificationMessage(){
@@ -62,16 +69,19 @@ export class UpdateProductQuantityComponent implements OnInit {
   async updateQuantity(updateProductQuan) {
 debugger
  
-      this.updateProduct = {};
-      if(updateProductQuan.quantity== undefined){
-        alert("please input Quantoty");
+      this.updatePro = {};
+      if(updateProductQuan.quantity== undefined || updateProductQuan.quantity==null){
+        alert("Please input Quantity");
+      }
+      else if(updateProductQuan.name== undefined || updateProductQuan.name==null){
+        alert("Please Select Product Name");
       }
 
       else{
-        this.updateProduct = this.products.filter(x => x.name == updateProductQuan.name);
-        this.updatedQuantity = this.updateProduct[0].Quantity + updateProductQuan.quantity;
+        this.updatePro = this.products.filter(x => x.name == updateProductQuan.name);
+        this.updatedQuantity = this.updatePro[0].Quantity + updateProductQuan.quantity;
         this.productObj = {
-          'id': this.updateProduct[0].id,
+          'id': this.updatePro[0].id,
           "name": updateProductQuan.name,
           "Quantity": this.updatedQuantity
         };

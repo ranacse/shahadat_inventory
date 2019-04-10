@@ -42,10 +42,11 @@ export class ProductSellComponent implements OnInit {
   totalAmount = 0;
   errorMessage = false;
   invoiceId: any;
-  message: string = "Hola Mundo!"
+  message: string ;
 
   i: any = 0;
   index: any;
+  notShowInvoiceHtml=true;
   remainQuantity: any;
 
   finalProduct: any = {};
@@ -88,11 +89,11 @@ export class ProductSellComponent implements OnInit {
       this.totalAmount = this.totalAmount + this.amount;
 
       this.productSellObj.push({
-        id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct,
+        id: this.productsAllForSell[this.index].id, customerName: newProduct.customerName, name: newProduct.name, Price: newProduct.priceProduct,
         remainQuantity: this.remainQuantity, Quantity: newProduct.quantityProduct, totalPrice: this.amount
       });
  
-      this.updateProductObj.push({ id: this.productsAllForSell[this.index].id, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, amount: this.amount });
+      this.updateProductObj.push({ id: this.productsAllForSell[this.index].id, customerName: newProduct.customerName, name: newProduct.name, Price: newProduct.priceProduct, Quantity: newProduct.quantityProduct, amount: this.amount });
       this.index2 = this.searchTotalQuantityForEachProduct.findIndex(presentProduct => presentProduct.name === newProduct.name);
 
       this.products = this.products.filter(function (obj) {
@@ -101,6 +102,7 @@ export class ProductSellComponent implements OnInit {
 
       this.productsAllForSell[this.index].Quantity = this.productsAllForSell[this.index].Quantity - newProduct.quantityProduct;
       this.finalProduct = {};
+      this.finalProduct.customerName=newProduct.customerName;
       this.index = null;
 
 
@@ -204,6 +206,7 @@ export class ProductSellComponent implements OnInit {
 
   ngOnInit() {
     this.message12 = 'from product Sell!';
+    this.message="hello world";
     this.getAllProducts();
   }
 

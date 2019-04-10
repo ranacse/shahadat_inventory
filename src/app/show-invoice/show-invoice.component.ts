@@ -31,16 +31,20 @@ export class ShowInvoiceComponent implements OnInit {
   data: object = {};
   fullAmount = 0;
   lastProductInvoice: any;
+  customerName:any;
   totalAmount:any=0;
   noValue='';
   dateFormat:any;
+  FromDate:string;
 
   myDate = new Date();
   public todayDate = new Date(Date.parse(Date()));
-  FromDate = this.myDate.getFullYear() + '-' + ('0' + (this.myDate.getMonth() + 1)).slice(-2) + '-' + ('0' + this.myDate.getDate()).slice(-2);
+  // FromDate = this.myDate.getFullYear() + '-' + ('0' + (this.myDate.getMonth() + 1)).slice(-2) + '-' + ('0' + this.myDate.getDate()).slice(-2);
 
 
   constructor(private http: Http) { }
+
+  @Input()message:string;
 
   message123: any;
 
@@ -58,8 +62,8 @@ export class ShowInvoiceComponent implements OnInit {
   downloadPdf() {
 
     var date = new Date();
-    var FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2)+ ':' + ('0' + date.getMinutes()).slice(-2);
-
+    this.FromDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + '-' + ('0' + date.getHours()).slice(-2)+ ':' + ('0' + date.getMinutes()).slice(-2);
+debugger
     let doc = new jsPDF();
     var pdfName = "Invoice_".concat(this.invoiceNumber.toString()).concat("_Date_").concat(this.FromDate).concat(".pdf");
 
@@ -75,7 +79,7 @@ export class ShowInvoiceComponent implements OnInit {
   ngOnInit() {
 
 
-
+debugger
     this.myDate = new Date();
     this.todayDate = new Date(Date.parse(Date()));
 
@@ -84,9 +88,10 @@ export class ShowInvoiceComponent implements OnInit {
 
     this.http.get("http://localhost:3000/sell").subscribe(
       (res: Response) => {
-        
+        debugger
         let invoiceNumber = res.json();
         this.lastProductInvoice = invoiceNumber[0].lastInvoieNumber;
+        this.customerName=invoiceNumber[0].customerName;
 
         const url = `${"http://localhost:3000/sellitems"}/${this.lastProductInvoice}`;
         return this.http.get(url, { headers: this.headers }).subscribe((res: Response) => {
@@ -96,7 +101,7 @@ export class ShowInvoiceComponent implements OnInit {
             this.sellProducts[i].sellId=i+1;
           }
 
-          this.downloadPdf();
+         // this.downloadPdf();
 
         })
           

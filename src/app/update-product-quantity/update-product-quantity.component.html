@@ -18,17 +18,18 @@
   <h2></h2>
   <p></p>
   <form class="form-inline">
-    <div class="form-group">
-      <label for="email">Product:</label>
+    <div class="form-group" >
+      <label for="name" >Product:</label>
       <select id="name" name="name" [(ngModel)]="updateProduct.name" class="form-control" #pname="ngModel" required>
         <option *ngFor="let product of products" value="{{product.name}}">{{product.name}}</option>
       </select>
     </div>
-   
-    <div class="form-group">
+
+    <div class="form-group" >
       <label for="pwd">Add Quantiy:</label>
       <input type="number" [(ngModel)]="updateProduct.quantity" class="form-control" id="pwd" #pquantity="ngModel"
-        placeholder="Enter New Quantiy" name="pquantity" required minlength="1" pattern="[0-9]">
+        placeholder="Enter New Quantiy" name="pquantity" required minlength="1" pattern="[0-9]"  >
+ 
       <div *ngIf="pquantity.invalid && (pquantity.dirty || pquantity.touched)" class="alert alert-danger">
 
         <div *ngIf="pquantity.errors.required">
@@ -37,13 +38,17 @@
         <div *ngIf="pquantity.errors.minlength">
           Quantity must be at least 1 characters long.
         </div>
-
-
+        <div *ngIf="pquantity.errors?.pattern">
+            Quantity not valid.
+       </div> 
+       
       </div>
     </div>
-    
+
   </form>
 
   <button type="button" mdbBtn color="primary" mdbWavesEffect align="right"
     (click)="updateQuantity(updateProduct)">Finish</button>
 </div>
+
+

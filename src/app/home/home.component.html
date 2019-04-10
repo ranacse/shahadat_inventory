@@ -1,4 +1,3 @@
-
 <div class="sidenav">
 
   <a></a>
@@ -18,27 +17,37 @@
 
 
 <div>
-
+<p>this is {{asd}}</p>
   <<table align="center">
     Products
     </table>
     <th></th>
 
-    <table align="center">
-      <th>ID</th>
-      <th>Name</th>
-      <th>Quantity</th>
-      <th></th>
-      
-      <tr *ngFor="let product of products;  let i= index">
-        <td> {{i+1}} </td>
-        <!-- <td>{{product.id}}</td> -->
-        <td>{{product.name}}</td>
-        <td>{{product.Quantity}}</td>
-       
-        <td><button type="submit" align="right" class="btn btn-default" (click)="deleteProduct(product.id)">DELETE</button></td> 
-    
-      </tr>
+    <table align="center"  class="table table-striped; " >
+      <thead>
+        <th style="text-align:center">ID</th>
+        <th style="text-align:center">Name</th>
+        <th style="text-align:center">Quantity</th>
+        <th style="text-align:center">Delete</th>
+      </thead>
+
+      <tbody>
+
+
+
+        <tr *ngFor="let product of products;  let i= index">
+          <td> {{i+1}} </td>
+          <td>{{product.name}}</td>
+          <td>{{product.Quantity}}</td>
+
+          <td><button type="button" (click)="deleteProduct(product.id)" class="btn btn-sm btn-danger">
+              <i class="glyphicon glyphicon-remove-circle">
+              </i>
+            </button></td>
+
+        </tr>
+      </tbody>
     </table>
 
+    
 </div>

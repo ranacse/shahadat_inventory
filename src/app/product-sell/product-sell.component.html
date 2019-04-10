@@ -1,4 +1,3 @@
-
 <div class="sidenav">
 
   <a></a>
@@ -18,8 +17,28 @@
 
 
 <h2 align="center">
-  Product Transection 
+  Product Transection
 </h2>
+
+
+
+<div class="container-fluid" id="content">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="container">
+
+        <div class="col-sm-8">
+          <form>
+            <label for="fname">Customer Name</label>
+            <input type="text" class="form-control" name="customerName" id="customerName"
+              [(ngModel)]="finalProduct.customerName" placeholder="Customer Name">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <br>
@@ -29,16 +48,21 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="container">
+        
 
         <form class="form-horizontal">
+          
+
           <div class="row" style="padding-left: 15px;">
             <div class="col-25">
-              <label class="control-label col-sm-2" for="position">Product:</label>
+              <label class="control-label col-sm-3" for="position">Product:</label>
             </div>
             <div class="col-25">
 
-              <select id="name" class="form-control" name="name" style="font-size: 8px;" [(ngModel)]="finalProduct.name">
-                <option *ngFor="let product of products" value="{{product.name}}" style="font-size: 10px;"><strong>{{product.name}}</strong></option>
+              <select id="name" class="form-control" name="name" style="font-size: 8px;"
+                [(ngModel)]="finalProduct.name">
+                <option *ngFor="let product of products" value="{{product.name}}" style="font-size: 10px;">
+                  <strong>{{product.name}}</strong></option>
               </select>
             </div>
           </div>
@@ -49,8 +73,8 @@
             </div>
             <div class="col-25">
 
-              <input type="number" class="form-control" name="quantityProduct" id="quantityProduct" [(ngModel)]="finalProduct.quantityProduct"
-                placeholder="quantity">
+              <input type="number" class="form-control" name="quantityProduct" id="quantityProduct"
+                [(ngModel)]="finalProduct.quantityProduct" placeholder="quantity">
             </div>
           </div>
 
@@ -60,8 +84,8 @@
               <label class="control-label col-sm-2" for="position">Price:</label>
             </div>
             <div class="col-25">
-              <input type="number" class="form-control" name="priceProduct" id="priceProduct" [(ngModel)]="finalProduct.priceProduct"
-                placeholder="price">
+              <input type="number" class="form-control" name="priceProduct" id="priceProduct"
+                [(ngModel)]="finalProduct.priceProduct" placeholder="price">
 
             </div>
           </div>
@@ -73,13 +97,13 @@
             </div>
           </div>
           <popup>Change quantity. Quantity is more than in store</popup>
-          
+
         </form>
 
       </div>
     </div>
-    <div class="col-sm-3" >
-      <div class="Content" >
+    <div class="col-sm-3">
+      <div class="Content">
         <h2 style="font-size: 15px;" align="center"><strong>Present Product Status</strong></h2>
 
         <table align="center" class="table table-fixed">
@@ -132,8 +156,9 @@
       <td align="center">{{singleProduct.Price}}</td>
       <td align="center">{{singleProduct.totalPrice}}</td>
 
-      <td><button type="submit" class="btn btn-default" (click)="deleteProductFromList(singleProduct.id)">Delete</button></td>
-      
+      <td><button type="submit" class="btn btn-default"
+          (click)="deleteProductFromList(singleProduct.id)">Delete</button></td>
+
 
     </tr>
 
@@ -146,7 +171,7 @@
     <tr>
 
   </table>
- 
+
   <button type="submit" align="right" class="btn btn-default" (click)="submitTotalSell(9999)">Submit</button>
 
 </div>
@@ -154,6 +179,8 @@
 <br>
 
 <div *ngIf="isAdded" align="center">
-  <a routerLink="/invoice" (click)="sendMessage()"> Show invoice </a>
+  <button routerLink="/invoice" (click)="sendMessage()">Show invoice</button>
 
 </div>
+
+<!-- <app-show-invoice *ngIf = "!notShowInvoiceHtml" [message]="message"></app-show-invoice> -->
